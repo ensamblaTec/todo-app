@@ -20,7 +20,6 @@ export const login = async (email: string, password: string) => {
  * Register metod
  * @param {string} name 
  * @param {number} age 
- * @param {boolean} admin 
  * @param {string} email 
  * @param {string} password 
  * @returns Promise

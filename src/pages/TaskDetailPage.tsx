@@ -7,6 +7,7 @@ import { Editor } from "../components/editor/Editor";
 import { getTaskByID } from "../services/taskService";
 import { AxiosResponse } from "axios";
 import { Task } from "../utils/types/Task.type";
+import { TasksDetailMaterial } from "../components/forms/TaskDetailMaterial";
 
 const TaskDetailPage = () => {
   let loggedIn = useSessionStorage("sessionToken");
@@ -45,25 +46,7 @@ const TaskDetailPage = () => {
 
   return (
     <div>
-      <h1>Task Detail Page {id}</h1>
-      {task ? (
-        <div key={task._id}>
-          <h3>{task.title}</h3>
-          <h4>Description: {task?.description}</h4>
-          <h5>Owner: {task.owner}</h5>
-          <div>
-            <h5>Tags: </h5>
-            {task?.tag.length > 0 ? (
-              <div>
-                <ul>
-                  {task.tag.map((item) => (<li>{item}</li>))}
-                </ul>
-              </div>
-            ) : (
-              <div>Loading data...</div>
-            )}
-          </div>
-        </div>
+      {task ? (<><TasksDetailMaterial {...task}/></>
       ) : (
         <div></div>
       )}

@@ -1,5 +1,6 @@
-import "./App.css";
+import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
 import { AppRoutes } from "./routes/Routes";
 import { StickyFooter } from "./components/dashboard/StickyFooter";
 

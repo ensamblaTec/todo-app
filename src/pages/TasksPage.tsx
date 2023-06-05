@@ -4,6 +4,7 @@ import { useSessionStorage } from "../hooks/useSessionStorage";
 import { getAllTasks } from "../services/taskService";
 import { AxiosResponse } from "axios";
 import { Task } from "../utils/types/Task.type";
+import { TasksMaterial } from "../components/forms/TasksMaterial";
 
 const TasksPage = () => {
   let loggedIn = useSessionStorage("sessionToken");
@@ -49,18 +50,7 @@ const TasksPage = () => {
 
   return (
     <div>
-      <h1>Task Page</h1>
-      {tasks.length > 0 ? (
-        <div>
-          
-          {tasks.map((task: Task) => (
-            <div key={task._id}>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div>No Tasks Found</div>
-      )}
+      <TasksMaterial />
     </div>
   );
 };

@@ -11,6 +11,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import TasksPage from "../pages/TasksPage";
 import TaskDetailPage from "../pages/TaskDetailPage";
+import { TasksDetailMaterial } from "../components/forms/TaskDetailMaterial";
 
 export const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ export const AppRoutes = () => {
       <Route path="/register" element={<RegisterPage />}></Route>
       <Route path="/tasks" element={<TasksPage />}></Route>
       <Route path="/tasks/:id" element={<TaskDetailPage />}></Route>
+      <Route path="/tasks/new" element={<TasksDetailMaterial />}></Route>
       <Route path="*" element={<Navigate to="/" replace />}></Route>
     </Routes>
   );

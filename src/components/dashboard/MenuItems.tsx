@@ -1,44 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 // Material List Components
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 // Material Icon Components
-import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ListAltIcon from "@mui/icons-material/ListAlt";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
+import { Link } from "@mui/material";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 
-export const MenuItems = (
+export const MenuItems = () => (
   <React.Fragment>
     {/* Dashboard */}
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <Link href="/" color="inherit" underline="none">
+        <ListItemText primary="Dashboard" />
+      </Link>
     </ListItemButton>
-    {/* Task */}
-    <ListItemButton>
-      <ListItemIcon>
-        <ListAltIcon />
-      </ListItemIcon>
-      <ListItemText primary="Task" />
-    </ListItemButton>
-    {/* Users */}
-    <ListItemButton>
-      <ListItemIcon>
-        <SupervisorAccountIcon />
-      </ListItemIcon>
-      <ListItemText primary="Users" />
-    </ListItemButton>
-    {/* Logout */}
-    <ListItemButton>
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <ListItemText primary="Logout" />
-    </ListItemButton>
+    {!useSessionStorage("sessionToken") ? (
+      <>
+        <ListItemButton>
+          <ListItemIcon>
+            <SupervisorAccountIcon />
+          </ListItemIcon>
+          <Link href="/login" color="inherit" underline="none">
+            <ListItemText primary="Login" />
+          </Link>
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <Link href="/register" color="inherit" underline="none">
+            <ListItemText primary="Register" />
+          </Link>
+        </ListItemButton>
+      </>
+    ) : (
+      <>
+      {/*  */}
+        <ListItemButton>
+          <ListItemIcon>
+            <SupervisorAccountIcon />
+          </ListItemIcon>
+          <Link href="/tasks" color="inherit" underline="none">
+            <ListItemText primary="Tasks" />
+          </Link>
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <Link href="/logout" color="inherit" underline="none">
+            <ListItemText primary="Logout" />
+          </Link>
+        </ListItemButton>
+      </>
+    )}
   </React.Fragment>
 );

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 // Theme personalization
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -32,6 +31,12 @@ import Container from "@mui/material/Container";
 
 // List for the menu
 import { MenuItems } from "./MenuItems";
+
+import ImageList from "@mui/material/ImageList";
+import { ImageListItem } from "@mui/material";
+import { logoutSessionStorage } from "../../hooks/logoutSessionStorage";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
+import { useNavigate } from "react-router-dom";
 
 // Width for Drawer Menu
 const drawerWidth: number = 240;
@@ -92,11 +97,21 @@ const myTheme = createTheme();
 
 // Dashboard content
 export const Dashboard = () => {
+  let navigate = useNavigate();
+  const loggedIn = useSessionStorage("sessionToken");
+  React.useEffect(() => {
+    if (loggedIn) return navigate("/");
+  }, loggedIn)
+
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  const handleLogout = (event: any) => {
+    event.preventDefault();
+    logoutSessionStorage()
+  }
   return (
     <ThemeProvider theme={myTheme}>
       <Box
@@ -148,7 +163,7 @@ export const Dashboard = () => {
             </IconButton>
             {/* ICON to logout */}
             <IconButton color="inherit">
-              <LogoutIcon />
+              <LogoutIcon onClick={handleLogout}/>
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -168,7 +183,7 @@ export const Dashboard = () => {
           </Toolbar>
           <Divider />
           {/* List of menu */}
-          <List component="nav">{MenuItems}</List>
+          <List component="nav">{MenuItems()}</List>
         </Drawer>
         {/* Dashboard Content */}
         <Box
@@ -185,25 +200,34 @@ export const Dashboard = () => {
         >
           {/* Toolbar */}
           <Toolbar />
-            {/* Container with the content */}
-            <Container
-              maxWidth="lg"
-              sx={{
-                mt: 4,
-                mg: 4,
-              }}
-            >
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
+          {/* Container with the content */}
+          <Container
+            maxWidth="lg"
+            sx={{
+              mt: 4,
+              mg: 4,
+            }}
+          >
+            <Grid item xs={12} md={8} lg={9}>
+              {/* <Paper
                   sx={{
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
                     height: 240,
                   }}
-                ></Paper>
-              </Grid>
-            </Container>
+                >To-do App Page</Paper> */}
+              <ImageList sx={{ with: "auto", height: "720" }} cols={1}>
+                <ImageListItem>
+                  <img
+                    src={"https://wallpaperset.com/w/full/1/a/b/53321.jpg"}
+                    loading="lazy"
+                    alt="Welcome to mid game in life this year"
+                  />
+                </ImageListItem>
+              </ImageList>
+            </Grid>
+          </Container>
         </Box>
       </Box>
     </ThemeProvider>

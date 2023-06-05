@@ -12,18 +12,44 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { login } from "../../services/authService";
+import { AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export const LoginMaterial = () => {
+  let navigate = useNavigate();
+  const loggedIn = useSessionStorage("sessionToken");
+
+  React.useEffect(() => {
+    if (loggedIn) return navigate("/");
+  }, loggedIn)
+  
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = {
+      email: data.get("email")?.toString() || "",
+      password: data.get("password")?.toString() || "",
+    };
+    login(formData.email, formData.password)
+      .then(async (response: AxiosResponse) => {
+        if (response.status !== 200) {
+          throw new Error("Invalid Credentials");
+        }
+        if (!response.data.token)
+          throw new Error("Error generating Login Token");
+        await sessionStorage.setItem("sessionToken", response.data.token);
+        await sessionStorage.setItem("email", formData.email);
+        navigate("/");
+        console.table(response.data);
+      })
+      .catch((err) =>
+        console.error(`[LOGIN ERROR] Something has occurred: ${err}`)
+      );
   };
 
   return (
@@ -89,7 +115,7 @@ export const LoginMaterial = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
