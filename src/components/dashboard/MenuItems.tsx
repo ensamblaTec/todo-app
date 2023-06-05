@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // Material List Components
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -6,7 +6,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 
 // Material Icon Components
 import LogoutIcon from "@mui/icons-material/Logout";
-import ListAltIcon from "@mui/icons-material/ListAlt";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useSessionStorage } from "../../hooks/useSessionStorage";
 import { Link } from "@mui/material";

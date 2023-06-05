@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // React Router DOM Imports
 import { useNavigate, useParams } from "react-router-dom";
@@ -42,7 +42,7 @@ const TaskDetailPage = () => {
           );
       } else return navigate("/tasks");
     }
-  }, [loggedIn]);
+  }, [id, loggedIn, navigate]);
 
   return (
     <div>

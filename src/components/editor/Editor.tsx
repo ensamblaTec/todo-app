@@ -1,7 +1,4 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
 import { Highlight, themes } from "prism-react-renderer"
-import styles from 'styles.module.css'
 
 const codeBlock = `
 (function someDemo() {

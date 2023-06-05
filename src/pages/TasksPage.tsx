@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSessionStorage } from "../hooks/useSessionStorage";
 import { getAllTasks } from "../services/taskService";
 import { AxiosResponse } from "axios";
-import { Task } from "../utils/types/Task.type";
 import { TasksMaterial } from "../components/forms/TasksMaterial";
 
 const TasksPage = () => {

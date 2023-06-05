@@ -25,7 +25,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 // Layout Box & Grid
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
 
@@ -101,7 +100,7 @@ export const Dashboard = () => {
   const loggedIn = useSessionStorage("sessionToken");
   React.useEffect(() => {
     if (loggedIn) return navigate("/");
-  }, loggedIn)
+  }, [loggedIn, navigate])
 
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
