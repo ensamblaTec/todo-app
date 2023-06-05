@@ -21,7 +21,7 @@ export const AppRoutes = () => {
       <Route path="/tasks" element={<TasksPage />}></Route>
       <Route path="/tasks/:id" element={<TaskDetailPage />}></Route>
       <Route path="/tasks/new" element={<TasksDetailMaterial />}></Route>
-      <Route path="*" element={<Navigate to="/" replace />}></Route>
+      <Route path="/*" element={<Navigate to="/" replace />}></Route>
     </Routes>
   );
 };
